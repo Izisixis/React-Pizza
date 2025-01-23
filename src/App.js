@@ -18,7 +18,7 @@ function App() {
 
   React.useEffect(() => {
     const changeSort = `sortBy=${sortType.sort.replace('-', '')}`;
-    const order = sortType.sort.includes('-') ? 'asc' : 'desc'; //ПИДРИЛА, ПОЧИНИТЬ ЕГО ПОЗЖЕ
+    const order = sortType.sort.includes('-') ? 'asc' : 'desc'; //Need to fix
     const changeCategory = categoriesId > 0 ? `category=${categoriesId}` : '';
     fetch(
       `https://64aaf4ed0c6d844abedf06f1.mockapi.io/items?${changeCategory}&${changeSort}&order=${order}}`,
