@@ -310,3 +310,38 @@ body {
     }
   }
 }
+
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  left: -10em;
+
+  padding: .4em;
+  border: 1px solid #828282;
+  border-radius: 1em;
+  height: 2.5em;
+  .searchEvent{
+    display: inline-block;
+    height: 1.5em;
+    
+  }
+  :hover{
+    cursor: pointer;
+    
+  }
+
+  input{
+    width: 24em;
+    height: 2.5em;
+
+    padding:.2em 0 0 .7em;
+    border: none;
+  }
+
+  .clear{
+    position: absolute;
+    right: .3em;}
+}
