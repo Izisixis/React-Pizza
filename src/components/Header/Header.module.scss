@@ -1,0 +1,16 @@
+@import '../../scss/variables';
+
+
+.header{
+  padding: 2em 0;
+  .container{
+    display: flex;
+    margin: auto;
+
+    padding: 35px auto;
+    
+    width: $container-width;
+  
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,17 @@
+@import './../../scss/variables';
+
+.headerLogo{
+  display: flex;
+  img{
+    width: 2.4em;
+    margin-right: 16px;
+  }
+  h1{
+    font-size: 24px;
+    font-weight: 800;
+  }
+  p{
+    font-weight: 600;
+    color: $logo-font-color;
+  }
+}

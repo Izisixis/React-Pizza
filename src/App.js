@@ -10,6 +10,7 @@ import NotFound from './Pages/NotFound';
 export const SearchContext = createContext();
 function App() {
   const [searchValue, setSearchValue] = useState('');
+
   return (
     <div className="App">
       <SearchContext.Provider value={{ searchValue, setSearchValue }}>
