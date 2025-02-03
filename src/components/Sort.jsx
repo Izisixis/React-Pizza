@@ -1,23 +1,28 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeSort } from '../redux/slises/filterSlise';
 
-const Sort = ({ sortValue, onClickSort }) => {
+const Sort = () => {
   const [open, setOpen] = React.useState(false);
   const list = [
     { name: 'Популярные', sortProperty: 'rating' },
     { name: 'Экзотические', sortProperty: '-rating' },
-    { name: 'Сначала дорогие', sortProperty: 'price' },
     { name: 'Сначала дешёвые', sortProperty: '-price' },
-    { name: 'Я-А', sortProperty: 'title' },
+    { name: 'Сначала дорогие', sortProperty: 'price' },
     { name: 'А-Я', sortProperty: '-title' },
+    { name: 'Я-А', sortProperty: 'title' },
   ];
+  const dispatch = useDispatch();
+  const sorted = useSelector((state) => state.category.sortValue);
 
   function sortClick(i) {
-    onClickSort(i);
+    dispatch(changeSort(i));
     setOpen(false);
   }
 
   return (
     <div className="sort">
+      <button onClick={() => console.log(sorted)}>test</button>
       <div className="sort__label">
         <svg
           width="10"
@@ -31,7 +36,7 @@ const Sort = ({ sortValue, onClickSort }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sortValue.name}</span>
+        <span onClick={() => setOpen(!open)}>{sorted.name}</span>
       </div>
 
       {open && (
@@ -41,7 +46,7 @@ const Sort = ({ sortValue, onClickSort }) => {
               <li
                 onClick={() => sortClick(obj)}
                 key={i}
-                className={sortValue.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={sorted.sortProperty === obj.sortProperty ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}
