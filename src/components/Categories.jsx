@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCategory } from './../redux/slises/filterSlise.js';
+import { setCategoryId } from '../redux/slises/filterSlise';
 
 const Categories = () => {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+
   const dispatch = useDispatch();
-  const changed = useSelector((state) => state.category.categoryValue);
+  const category = useSelector((state) => state.filters.categoryId);
 
   return (
     <div className="categories">
@@ -13,8 +14,8 @@ const Categories = () => {
         {categories.map((text, i) => (
           <li
             key={i}
-            onClick={() => dispatch(changeCategory(i))}
-            className={changed === i ? 'active' : ''}>
+            onClick={() => dispatch(setCategoryId(i))}
+            className={category === i ? 'active' : ''}>
             {text}
           </li>
         ))}

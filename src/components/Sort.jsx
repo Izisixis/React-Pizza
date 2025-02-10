@@ -1,28 +1,28 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSort } from '../redux/slises/filterSlise';
+import { setSort } from '../redux/slises/filterSlise';
+
+export const list = [
+  { name: 'Популярные', sortProperty: 'rating' },
+  { name: 'Экзотические', sortProperty: '-rating' },
+  { name: 'Сначала дешёвые', sortProperty: '-price' },
+  { name: 'Сначала дорогие', sortProperty: 'price' },
+  { name: 'А-Я', sortProperty: '-title' },
+  { name: 'Я-А', sortProperty: 'title' },
+];
 
 const Sort = () => {
   const [open, setOpen] = React.useState(false);
-  const list = [
-    { name: 'Популярные', sortProperty: 'rating' },
-    { name: 'Экзотические', sortProperty: '-rating' },
-    { name: 'Сначала дешёвые', sortProperty: '-price' },
-    { name: 'Сначала дорогие', sortProperty: 'price' },
-    { name: 'А-Я', sortProperty: '-title' },
-    { name: 'Я-А', sortProperty: 'title' },
-  ];
   const dispatch = useDispatch();
-  const sorted = useSelector((state) => state.category.sortValue);
+  const sort = useSelector((state) => state.filters.sort);
 
   function sortClick(i) {
-    dispatch(changeSort(i));
+    dispatch(setSort(i));
     setOpen(false);
   }
 
   return (
     <div className="sort">
-      <button onClick={() => console.log(sorted)}>test</button>
       <div className="sort__label">
         <svg
           width="10"
@@ -36,7 +36,7 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sorted.name}</span>
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>
       </div>
 
       {open && (
@@ -46,7 +46,7 @@ const Sort = () => {
               <li
                 onClick={() => sortClick(obj)}
                 key={i}
-                className={sorted.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}
