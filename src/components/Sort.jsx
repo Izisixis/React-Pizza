@@ -27,7 +27,7 @@ const Sort = () => {
       const eventPath = event.composedPath();
       if (!eventPath.includes(sortRef.current)) {
         setOpen(false);
-        console.log('ты хуй пойми куда нажал');
+        console.log('you make a click');
       }
     };
 
