@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../redux/slises/filterSlise';
 
@@ -15,14 +15,30 @@ const Sort = () => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filters.sort);
+  const sortRef = useRef();
 
   function sortClick(i) {
     dispatch(setSort(i));
     setOpen(false);
   }
 
+  useEffect(() => {
+    const onClickAnyway = (event) => {
+      const eventPath = event.composedPath();
+      if (!eventPath.includes(sortRef.current)) {
+        setOpen(false);
+        console.log('ты хуй пойми куда нажал');
+      }
+    };
+
+    document.body.addEventListener('click', onClickAnyway);
+    return () => {
+      document.body.removeEventListener('click', onClickAnyway);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -36,7 +52,7 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>
+        <span onClick={() => setOpen(true)}>{sort.name}</span>
       </div>
 
       {open && (
@@ -46,7 +62,9 @@ const Sort = () => {
               <li
                 onClick={() => sortClick(obj)}
                 key={i}
-                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={
+                  sort.sortProperty === obj.sortProperty ? 'active' : ''
+                }>
                 {obj.name}
               </li>
             ))}
